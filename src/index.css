@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper-bg text-paper-ink antialiased;
+  }
+}
+
+/* 自定义滚动条样式，适配手帐风格 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-stone-300 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-stone-400;
+}
+
+/* 导出图片时的特定样式 */
+.exporting input,
+.exporting textarea,
+.exporting select {
+  border: none !important;
+  background-color: transparent !important;
+  resize: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 针对 Input 的下划线，如果是通过 border-b 实现的，这里也会被清除 */
+/* 如果需要保留下划线，可以单独处理，但根据需求是“去边框”，所以清除是正确的 */
+
+/* 隐藏 Select 的默认箭头和边框 */
+.exporting select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: none !important;
+  padding-right: 0 !important;
+  text-align: center;
+  text-align-last: center; /* 某些浏览器需要这个 */
+}
+
+/* 隐藏 Placeholder (可选，为了画面更干净) */
+.exporting ::placeholder {
+  color: transparent !important;
+}
+
+/* 隐藏带有 data-export-hide 属性的元素 */
+.exporting [data-export-hide="true"],
+.exporting .export-hidden {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* 针对 TaskItem 中的删除按钮等 hover 元素，强制隐藏 */
+.exporting button[title="删除任务"],
+.exporting button[title="添加"],
+.exporting .group:hover button {
+  display: none !important;
+}
